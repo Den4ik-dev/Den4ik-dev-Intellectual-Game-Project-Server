@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "nZfa6nhIHnKid70TzgiCI450AB7ReHMdRNKCGrvDxyw=",
+  "Source": "server.Web",
+  "BasePath": "_content/server.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "server.Web\\wwwroot",
+      "Source": "server.Web",
+      "ContentRoot": "C:\\Users\\ignat\\Documents\\My Docs\\PROJECTS\\intellectual-game-project\\server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
