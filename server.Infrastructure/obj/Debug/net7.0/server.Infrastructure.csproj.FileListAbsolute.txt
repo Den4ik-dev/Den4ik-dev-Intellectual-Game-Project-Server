@@ -15,3 +15,21 @@ C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\serve
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Infrastructure\obj\Debug\net7.0\refint\server.Infrastructure.dll
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.pdb
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Infrastructure\obj\Debug\net7.0\ref\server.Infrastructure.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Infrastructure.deps.json
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Infrastructure.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Infrastructure.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Application.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Domain.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Application.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\bin\Debug\net7.0\server.Domain.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.AssemblyInfo.cs
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.sourcelink.json
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.csproj.CopyComplete
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\refint\server.Infrastructure.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\server.Infrastructure.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Infrastructure\obj\Debug\net7.0\ref\server.Infrastructure.dll

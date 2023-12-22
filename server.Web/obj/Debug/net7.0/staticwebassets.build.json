@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nZfa6nhIHnKid70TzgiCI450AB7ReHMdRNKCGrvDxyw=",
+  "Hash": "nnjk+7c61nXReA9VZ++Mrwm3RaOzdwYQe1qEEp01A6c=",
   "Source": "server.Web",
   "BasePath": "_content/server.Web",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "server.Web\\wwwroot",
       "Source": "server.Web",
-      "ContentRoot": "C:\\Users\\ignat\\Documents\\My Docs\\PROJECTS\\intellectual-game-project\\server\\server.Web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
       "BasePath": "_content/server.Web",
       "Pattern": "**"
     }

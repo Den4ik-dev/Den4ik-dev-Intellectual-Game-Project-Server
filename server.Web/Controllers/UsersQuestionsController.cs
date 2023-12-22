@@ -17,12 +17,12 @@ public class UsersQuestionsController : ControllerBase
     _usersQuestionsService = usersQuestionsService;
   }
 
-  [HttpGet("ask"), Authorize]
-  public async Task<UserQuestionDto> GetNewUserQuestion()
+  [HttpPost("ask"), Authorize]
+  public async Task<AskUserQuestionDto> GetNewUserQuestion()
   {
     int userId = int.Parse(User.Identity.Name);
 
-    return await _usersQuestionsService.GetNewUserQuestion(userId);
+    return await _usersQuestionsService.GetNewAskUserQuestion(userId);
   }
 
   [HttpPost("answer"), Authorize]
@@ -36,7 +36,65 @@ public class UsersQuestionsController : ControllerBase
 
     if (userQuestion == null)
       return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
-    
-    
+
+    if (userQuestion.AnswerNumber != 0)
+      return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
+
+    if (userQuestion.UserQuestionExpiryTime <= DateTime.UtcNow)
+      return BadRequest(new Response("Время ответита на вопрос истекло"));
+
+    if (answerUserQuestion.AnswerNumber <= 0 ||
+        answerUserQuestion.AnswerNumber > userQuestion.Question?.Answers?.Count())
+      return BadRequest(new Response("Нет такого варианта ответа"));
+
+    if(await _usersQuestionsService.CheckingAnswerUserQuestionAsync(answerUserQuestion, userQuestion))
+      return Ok(new { IsTrue = true, TrueAnswerNumber = answerUserQuestion.AnswerNumber });
+
+    int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
+
+    return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
+  }
+
+  [HttpGet("all"), Authorize]
+  public IEnumerable<UserQuestionDto> GetAllUserQuestions()
+  {
+    int userId = int.Parse(User.Identity.Name);
+
+    return _usersQuestionsService.GetAllUserQuestions(userId)
+      .Select(uq => new UserQuestionDto()
+      {
+        Id = uq.Id,
+        UserId = uq.UserId,
+        CategoryQuestionId = uq.Question.CategoryQuestionId,
+        QuestionId = uq.QuestionId,
+        QuestionContent = uq.Question.Content,
+        Complete = uq.Complete,
+        AnswerNumber = uq.AnswerNumber
+      });
+  }
+
+  [HttpGet, Authorize]
+  public async Task<IEnumerable<UserQuestionDto>> GetRangeOfUserQuestions(
+    [FromQuery] int limit, [FromQuery] int page)
+  {
+    int userId = int.Parse(User.Identity.Name);
+
+    int countOfUserQuestions = await _usersQuestionsService.CountOfUserQuestions(userId);
+
+    Response.Headers.Add(
+      "x-total-count",
+      countOfUserQuestions.ToString());
+
+    return _usersQuestionsService.GetRangeOfUserQuestion(userId, limit, page)
+      .Select(uq => new UserQuestionDto()
+      {
+        Id = uq.Id,
+        UserId = uq.UserId,
+        CategoryQuestionId = uq.Question.CategoryQuestionId,
+        QuestionId = uq.QuestionId,
+        QuestionContent = uq.Question.Content,
+        Complete = uq.Complete,
+        AnswerNumber = uq.AnswerNumber
+      });
   }
 }

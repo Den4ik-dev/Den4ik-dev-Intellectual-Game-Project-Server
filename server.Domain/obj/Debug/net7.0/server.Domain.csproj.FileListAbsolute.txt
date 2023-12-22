@@ -10,3 +10,16 @@ C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\serve
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Domain\obj\Debug\net7.0\refint\server.Domain.dll
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Domain\obj\Debug\net7.0\server.Domain.pdb
 C:\Users\ignat\Documents\My Docs\PROJECTS\intellectual-game-project\server\server.Domain\obj\Debug\net7.0\ref\server.Domain.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\bin\Debug\net7.0\server.Domain.deps.json
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\bin\Debug\net7.0\server.Domain.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\bin\Debug\net7.0\server.Domain.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.csproj.AssemblyReference.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.AssemblyInfoInputs.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.AssemblyInfo.cs
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.csproj.CoreCompileInputs.cache
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.sourcelink.json
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\refint\server.Domain.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\server.Domain.pdb
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Domain\obj\Debug\net7.0\ref\server.Domain.dll

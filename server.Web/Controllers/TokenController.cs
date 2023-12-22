@@ -38,7 +38,7 @@ public class TokenController : ControllerBase
 
     if(user is null || 
        user.RefreshToken != token.RefreshToken || 
-       user.RefreshTokenExpiryTime <= DateTime.Now)
+       user.RefreshTokenExpiryTime <= DateTime.UtcNow)
     {
       return BadRequest(new Response("Время жизни refresh token истекло"));
     }
