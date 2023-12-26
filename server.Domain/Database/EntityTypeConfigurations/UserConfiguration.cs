@@ -9,7 +9,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
   {
     builder.ToTable("users");
 
-    builder.HasIndex(u => u.Login);
+    builder.HasIndex(u => u.Login).IsUnique();
 
     builder.Property(u => u.Id).HasColumnName("user_id");
     builder.Property(u => u.Login).HasColumnName("login");

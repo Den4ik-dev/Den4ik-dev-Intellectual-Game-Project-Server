@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nnjk+7c61nXReA9VZ++Mrwm3RaOzdwYQe1qEEp01A6c=",
+  "Hash": "lEPM9320JpvNIVGhOvlr/dNQHqe3y2m3buHqa5qpgRA=",
   "Source": "server.Web",
   "BasePath": "_content/server.Web",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\1.png",
+      "SourceId": "server.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "RelativePath": "questions/images/1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\questions\\images\\1.png"
+    }
+  ]
 }

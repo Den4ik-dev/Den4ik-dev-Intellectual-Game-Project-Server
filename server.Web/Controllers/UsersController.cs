@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using server.Application.Interfaces;
 using server.Domain.DTOs;
 using server.Domain.Models;
@@ -15,25 +16,40 @@ namespace server.Web.Controllers;
 public class UsersController : ControllerBase
 {
   private IUsersService _usersService;
-  public UsersController(IUsersService usersService)
+  private ILogger<UsersController> _logger;
+
+  public UsersController(IUsersService usersService, ILogger<UsersController> logger)
   {
     _usersService = usersService;
+    _logger = logger;
   }
 
   [HttpPost("reg")]
-  public async Task<IActionResult> Register([FromBody] RegisteredUserDto loginUser,
+  public async Task<IActionResult> Register([FromBody] RegisteredUserDto registeredUser,
     [FromServices] IValidator<RegisteredUserDto> registeredUserValidator)
   {
     ValidationResult regiteredUserValidatorResult = 
-      registeredUserValidator.Validate(loginUser);
+      registeredUserValidator.Validate(registeredUser);
 
     if (!regiteredUserValidatorResult.IsValid)
       return BadRequest(new Response(regiteredUserValidatorResult.Errors.First().ErrorMessage));
 
-    if (await _usersService.GetUserAsync(loginUser.Login) != null)
-      return BadRequest(new Response("Пользователь с данным логино уже существует"));
+    if (await _usersService.GetUserAsync(registeredUser.Login) != null)
+      return BadRequest(new Response("Пользователь с данным логином уже существует"));
 
-    await _usersService.AddUserAsync(loginUser);
+    try
+    {
+      await _usersService.AddUserAsync(registeredUser);
+    }
+    catch(DbUpdateException ex)
+    {
+      _logger.LogError(ex.Message);
+      return BadRequest(new Response("Пользователь с данным логино уже существует"));
+    }
+    catch(Exception ex)
+    {
+      _logger.LogError(ex.Message);
+    }
 
     return Ok(new Response("Пользователь успешно зарегестрирован!"));
   }

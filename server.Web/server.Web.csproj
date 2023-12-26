@@ -20,9 +20,4 @@
     <ProjectReference Include="..\server.Infrastructure\server.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\questions\images\" />
-    <Folder Include="wwwroot\questions\images\" />
-  </ItemGroup>
-
 </Project>

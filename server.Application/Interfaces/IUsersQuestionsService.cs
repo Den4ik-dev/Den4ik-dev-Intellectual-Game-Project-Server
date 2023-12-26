@@ -13,4 +13,5 @@ public interface IUsersQuestionsService
   public IEnumerable<UserQuestion> GetAllUserQuestions(int userId);
   public IEnumerable<UserQuestion> GetRangeOfUserQuestion(int userId, int limit, int page);
   public Task<int> CountOfUserQuestions(int userId);
+  public Task SetUserQuestionExpiryTimeAsync(UserQuestion userQuestion);
 }

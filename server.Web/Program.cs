@@ -16,6 +16,8 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
     .UseLazyLoadingProxies()
     .UseSqlite(connectionString));
 
+builder.Services.AddCors();
+
 /* @authentication and authorization */
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options => options.TokenValidationParameters = new()
@@ -57,6 +59,13 @@ builder.Services.AddTransient<IValidator<AddedAnswerDto>, AddedAnswerDtoValidato
 builder.Services.AddTransient<IValidator<ChangedAnswerDto>, ChangedAnswerDtoValidator>();
 
 var app = builder.Build();
+
+app.UseCors(options => 
+  options
+    .WithOrigins("http://localhost:5173", "https://localhost:5173")
+    .AllowCredentials()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
 
 /* @authentication and authorization */
 app.UseAuthentication();

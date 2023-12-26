@@ -43,6 +43,12 @@ public class UsersQuestionsService : IUsersQuestionsService
     };
   }
 
+  public async Task SetUserQuestionExpiryTimeAsync(UserQuestion userQuestion)
+  {
+    userQuestion.UserQuestionExpiryTime = DateTime.UtcNow;
+    await _db.SaveChangesAsync();
+  }
+
   public async Task<UserQuestion?> GetUserQuestionAsync(
     Expression<Func<UserQuestion, bool>> predicate) => 
       await _db.UserQuestions.FirstOrDefaultAsync(predicate);

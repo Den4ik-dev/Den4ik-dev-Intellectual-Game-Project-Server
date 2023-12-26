@@ -54,6 +54,26 @@ public class UsersQuestionsController : ControllerBase
 
     return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
   }
+  [HttpPost("correct/answer/{idUserQuestion}"), Authorize]
+  public async Task<IActionResult> GetCorrectAnswer(int idUserQuestion)
+  {
+    int userId = int.Parse(User.Identity.Name);
+
+    UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(uq =>
+      uq.Id == idUserQuestion && uq.UserId == userId);
+
+    if (userQuestion == null)
+      return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
+
+    if (userQuestion.AnswerNumber != 0)
+      return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
+
+    await _usersQuestionsService.SetUserQuestionExpiryTimeAsync(userQuestion);
+
+    int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
+
+    return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
+  }
 
   [HttpGet("all"), Authorize]
   public IEnumerable<UserQuestionDto> GetAllUserQuestions()

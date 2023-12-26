@@ -12,6 +12,7 @@ public class RegisteredUserDtoValidator : AbstractValidator<RegisteredUserDto>
 
     RuleFor(u => u.Password)
       .NotNull().WithMessage("Пароль не может иметь значение null")
-      .NotEmpty().WithMessage("Вы не указали пароль");
+      .NotEmpty().WithMessage("Вы не указали пароль")
+      .MinimumLength(8).WithMessage("Пароль должен составлять не менее 8 символов");
   }
 }
