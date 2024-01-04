@@ -10,111 +10,130 @@ namespace server.Web.Controllers;
 [ApiController, Route("/api/users/questions")]
 public class UsersQuestionsController : ControllerBase
 {
-  private IUsersQuestionsService _usersQuestionsService;
+    private IUsersQuestionsService _usersQuestionsService;
 
-  public UsersQuestionsController(IUsersQuestionsService usersQuestionsService)
-  {
-    _usersQuestionsService = usersQuestionsService;
-  }
+    public UsersQuestionsController(IUsersQuestionsService usersQuestionsService)
+    {
+        _usersQuestionsService = usersQuestionsService;
+    }
 
-  [HttpPost("ask"), Authorize]
-  public async Task<AskUserQuestionDto> GetNewUserQuestion()
-  {
-    int userId = int.Parse(User.Identity.Name);
+    [HttpPost("ask"), Authorize]
+    public async Task<AskUserQuestionDto> GetNewUserQuestion()
+    {
+        int userId = int.Parse(User.Identity.Name);
 
-    return await _usersQuestionsService.GetNewAskUserQuestion(userId);
-  }
+        return await _usersQuestionsService.GetNewAskUserQuestion(userId);
+    }
 
-  [HttpPost("answer"), Authorize]
-  public async Task<IActionResult> AnswerTheQuestion(
-    [FromBody] AnswerUserQuestionDto answerUserQuestion)
-  {
-    int userId = int.Parse(User.Identity.Name);
+    [HttpPost("answer"), Authorize]
+    public async Task<IActionResult> AnswerTheQuestion(
+        [FromBody] AnswerUserQuestionDto answerUserQuestion
+    )
+    {
+        int userId = int.Parse(User.Identity.Name);
 
-    UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(uq => 
-      uq.Id == answerUserQuestion.UserQuestionId && uq.UserId == userId);
+        UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(
+            uq => uq.Id == answerUserQuestion.UserQuestionId && uq.UserId == userId
+        );
 
-    if (userQuestion == null)
-      return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
+        if (userQuestion == null)
+            return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
 
-    if (userQuestion.AnswerNumber != 0)
-      return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
+        if (userQuestion.AnswerNumber != 0)
+            return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
 
-    if (userQuestion.UserQuestionExpiryTime <= DateTime.UtcNow)
-      return BadRequest(new Response("Время ответита на вопрос истекло"));
+        if (userQuestion.UserQuestionExpiryTime <= DateTime.UtcNow)
+            return BadRequest(new Response("Время ответита на вопрос истекло"));
 
-    if (answerUserQuestion.AnswerNumber <= 0 ||
-        answerUserQuestion.AnswerNumber > userQuestion.Question?.Answers?.Count())
-      return BadRequest(new Response("Нет такого варианта ответа"));
+        if (
+            answerUserQuestion.AnswerNumber <= 0
+            || answerUserQuestion.AnswerNumber > userQuestion.Question?.Answers?.Count()
+        )
+            return BadRequest(new Response("Нет такого варианта ответа"));
 
-    if(await _usersQuestionsService.CheckingAnswerUserQuestionAsync(answerUserQuestion, userQuestion))
-      return Ok(new { IsTrue = true, TrueAnswerNumber = answerUserQuestion.AnswerNumber });
+        if (
+            await _usersQuestionsService.CheckingAnswerUserQuestionAsync(
+                answerUserQuestion,
+                userQuestion
+            )
+        )
+            return Ok(new { IsTrue = true, TrueAnswerNumber = answerUserQuestion.AnswerNumber });
 
-    int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
+        int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
 
-    return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
-  }
-  [HttpPost("correct/answer/{idUserQuestion}"), Authorize]
-  public async Task<IActionResult> GetCorrectAnswer(int idUserQuestion)
-  {
-    int userId = int.Parse(User.Identity.Name);
+        return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
+    }
 
-    UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(uq =>
-      uq.Id == idUserQuestion && uq.UserId == userId);
+    [HttpPost("correct/answer/{idUserQuestion}"), Authorize]
+    public async Task<IActionResult> GetCorrectAnswer(int idUserQuestion)
+    {
+        int userId = int.Parse(User.Identity.Name);
 
-    if (userQuestion == null)
-      return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
+        UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(
+            uq => uq.Id == idUserQuestion && uq.UserId == userId
+        );
 
-    if (userQuestion.AnswerNumber != 0)
-      return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
+        if (userQuestion == null)
+            return BadRequest(new Response("Вопрос, на который отвечал пользователь, не найден"));
 
-    await _usersQuestionsService.SetUserQuestionExpiryTimeAsync(userQuestion);
+        if (userQuestion.AnswerNumber != 0)
+            return BadRequest(new Response("Пользователь уже отвечал на данный вопрос"));
 
-    int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
+        await _usersQuestionsService.SetUserQuestionExpiryTimeAsync(userQuestion);
 
-    return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
-  }
+        int trueAnswerNumber = _usersQuestionsService.GetTrueAnswerNumberUserQuestion(userQuestion);
 
-  [HttpGet("all"), Authorize]
-  public IEnumerable<UserQuestionDto> GetAllUserQuestions()
-  {
-    int userId = int.Parse(User.Identity.Name);
+        return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
+    }
 
-    return _usersQuestionsService.GetAllUserQuestions(userId)
-      .Select(uq => new UserQuestionDto()
-      {
-        Id = uq.Id,
-        UserId = uq.UserId,
-        CategoryQuestionId = uq.Question.CategoryQuestionId,
-        QuestionId = uq.QuestionId,
-        QuestionContent = uq.Question.Content,
-        Complete = uq.Complete,
-        AnswerNumber = uq.AnswerNumber
-      });
-  }
+    [HttpGet("all"), Authorize]
+    public IEnumerable<UserQuestionDto> GetAllUserQuestions()
+    {
+        int userId = int.Parse(User.Identity.Name);
 
-  [HttpGet, Authorize]
-  public async Task<IEnumerable<UserQuestionDto>> GetRangeOfUserQuestions(
-    [FromQuery] int limit, [FromQuery] int page)
-  {
-    int userId = int.Parse(User.Identity.Name);
+        return _usersQuestionsService
+            .GetAllUserQuestions(userId)
+            .Select(
+                uq =>
+                    new UserQuestionDto()
+                    {
+                        Id = uq.Id,
+                        UserId = uq.UserId,
+                        CategoryQuestionId = uq.Question.CategoryQuestionId,
+                        QuestionId = uq.QuestionId,
+                        QuestionContent = uq.Question.Content,
+                        Complete = uq.Complete,
+                        AnswerNumber = uq.AnswerNumber
+                    }
+            );
+    }
 
-    int countOfUserQuestions = await _usersQuestionsService.CountOfUserQuestions(userId);
+    [HttpGet, Authorize]
+    public async Task<IEnumerable<UserQuestionDto>> GetRangeOfUserQuestions(
+        [FromQuery] int limit,
+        [FromQuery] int page
+    )
+    {
+        int userId = int.Parse(User.Identity.Name);
 
-    Response.Headers.Add(
-      "x-total-count",
-      countOfUserQuestions.ToString());
+        int countOfUserQuestions = await _usersQuestionsService.CountOfUserQuestions(userId);
 
-    return _usersQuestionsService.GetRangeOfUserQuestion(userId, limit, page)
-      .Select(uq => new UserQuestionDto()
-      {
-        Id = uq.Id,
-        UserId = uq.UserId,
-        CategoryQuestionId = uq.Question.CategoryQuestionId,
-        QuestionId = uq.QuestionId,
-        QuestionContent = uq.Question.Content,
-        Complete = uq.Complete,
-        AnswerNumber = uq.AnswerNumber
-      });
-  }
+        Response.Headers.Add("x-total-count", countOfUserQuestions.ToString());
+
+        return _usersQuestionsService
+            .GetRangeOfUserQuestion(userId, limit, page)
+            .Select(
+                uq =>
+                    new UserQuestionDto()
+                    {
+                        Id = uq.Id,
+                        UserId = uq.UserId,
+                        CategoryQuestionId = uq.Question.CategoryQuestionId,
+                        QuestionId = uq.QuestionId,
+                        QuestionContent = uq.Question.Content,
+                        Complete = uq.Complete,
+                        AnswerNumber = uq.AnswerNumber
+                    }
+            );
+    }
 }

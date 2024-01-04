@@ -1,100 +1,101 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using server.Application.Interfaces;
 using server.Domain.Database;
 using server.Domain.DTOs;
 using server.Domain.Models;
-using System.Linq.Expressions;
 
 namespace server.Infrastructure.Services;
+
 public class UsersQuestionsService : IUsersQuestionsService
 {
-  private ApplicationContext _db;
-  private IQuestionsService _questionsService;
-  
-  public UsersQuestionsService(ApplicationContext db, 
-    IQuestionsService questionsService)
-  {
-    _db = db;
-    _questionsService = questionsService;
-  }
+    private ApplicationContext _db;
+    private IQuestionsService _questionsService;
 
-  public async Task<AskUserQuestionDto> GetNewAskUserQuestion(int userId)
-  {
-    Question randomQuestion = await GetRandomQuestion();
-
-    UserQuestion newUserQuestion = new UserQuestion()
+    public UsersQuestionsService(ApplicationContext db, IQuestionsService questionsService)
     {
-      UserId = userId,
-      QuestionId = randomQuestion.Id,
-      UserQuestionExpiryTime = DateTime.UtcNow.Add(TimeSpan.FromMinutes(2))
-    };
+        _db = db;
+        _questionsService = questionsService;
+    }
 
-    _db.UserQuestions.Add(newUserQuestion);
-    await _db.SaveChangesAsync();
-
-    return new AskUserQuestionDto
+    public async Task<AskUserQuestionDto> GetNewAskUserQuestion(int userId)
     {
-      Id = newUserQuestion.Id,
-      UserId = newUserQuestion.UserId,
-      CategoryQuestionId = randomQuestion.CategoryQuestionId,
-      QuestionContent = randomQuestion.Content,
-      Answers = randomQuestion.Answers?.Select(ans => ans.Content).ToArray(),
-      ImagePath = randomQuestion.Image?.Path
-    };
-  }
+        Question randomQuestion = await GetRandomQuestion();
 
-  public async Task SetUserQuestionExpiryTimeAsync(UserQuestion userQuestion)
-  {
-    userQuestion.UserQuestionExpiryTime = DateTime.UtcNow;
-    await _db.SaveChangesAsync();
-  }
+        UserQuestion newUserQuestion = new UserQuestion()
+        {
+            UserId = userId,
+            QuestionId = randomQuestion.Id,
+            UserQuestionExpiryTime = DateTime.UtcNow.Add(TimeSpan.FromMinutes(2))
+        };
 
-  public async Task<UserQuestion?> GetUserQuestionAsync(
-    Expression<Func<UserQuestion, bool>> predicate) => 
-      await _db.UserQuestions.FirstOrDefaultAsync(predicate);
+        _db.UserQuestions.Add(newUserQuestion);
+        await _db.SaveChangesAsync();
 
-  public async Task<bool> CheckingAnswerUserQuestionAsync(
-    AnswerUserQuestionDto answerUserQuestion, UserQuestion userQuestion)
-  {
-    List<Answer>? questionAnswers = userQuestion.Question?.Answers?.ToList();
+        return new AskUserQuestionDto
+        {
+            Id = newUserQuestion.Id,
+            UserId = newUserQuestion.UserId,
+            CategoryQuestionId = randomQuestion.CategoryQuestionId,
+            QuestionContent = randomQuestion.Content,
+            Answers = randomQuestion.Answers?.Select(ans => ans.Content).ToArray(),
+            ImagePath = randomQuestion.Image?.Path
+        };
+    }
 
-    Answer? userAnswer = questionAnswers?[answerUserQuestion.AnswerNumber - 1];
+    public async Task SetUserQuestionExpiryTimeAsync(UserQuestion userQuestion)
+    {
+        userQuestion.UserQuestionExpiryTime = DateTime.UtcNow;
+        await _db.SaveChangesAsync();
+    }
 
-    userQuestion.AnswerNumber = answerUserQuestion.AnswerNumber;
-    userQuestion.Complete = userAnswer.IsTrue;
-    await _db.SaveChangesAsync();
+    public async Task<UserQuestion?> GetUserQuestionAsync(
+        Expression<Func<UserQuestion, bool>> predicate
+    ) => await _db.UserQuestions.FirstOrDefaultAsync(predicate);
 
-    return userAnswer.IsTrue;
-  }
+    public async Task<bool> CheckingAnswerUserQuestionAsync(
+        AnswerUserQuestionDto answerUserQuestion,
+        UserQuestion userQuestion
+    )
+    {
+        List<Answer>? questionAnswers = userQuestion.Question?.Answers?.ToList();
 
-  public IEnumerable<UserQuestion> GetAllUserQuestions(int userId) =>
-    _db.UserQuestions.Where(uq => uq.UserId == userId);
+        Answer? userAnswer = questionAnswers?[answerUserQuestion.AnswerNumber - 1];
 
-  public IEnumerable<UserQuestion> GetRangeOfUserQuestion(int userId, int limit, int page) => 
-    _db.UserQuestions.Where(uq => uq.UserId == userId)
-      .Skip(limit * page)
-      .Take(limit);
+        userQuestion.AnswerNumber = answerUserQuestion.AnswerNumber;
+        userQuestion.Complete = userAnswer.IsTrue;
+        await _db.SaveChangesAsync();
 
-  public async Task<int> CountOfUserQuestions(int userId) =>
-    await _db.UserQuestions.CountAsync(uq => uq.UserId == userId);
+        return userAnswer.IsTrue;
+    }
 
-  public int GetTrueAnswerNumberUserQuestion(UserQuestion userQuestion)
-  {
-    List<Answer>? questionAnswers = userQuestion.Question?.Answers?.ToList();
+    public IEnumerable<UserQuestion> GetAllUserQuestions(int userId) =>
+        _db.UserQuestions.Where(uq => uq.UserId == userId);
 
-    Answer? trueAnswer = questionAnswers?.FirstOrDefault(ans => ans.IsTrue);
+    public IEnumerable<UserQuestion> GetRangeOfUserQuestion(int userId, int limit, int page) =>
+        _db.UserQuestions.Where(uq => uq.UserId == userId).Skip(limit * page).Take(limit);
 
-    return questionAnswers.IndexOf(trueAnswer) + 1;
-  }
-  private async Task<Question> GetRandomQuestion()
-  {
-    Random random = new Random();
-    int countOfQuestions = await _db.Questions.CountAsync();
+    public async Task<int> CountOfUserQuestions(int userId) =>
+        await _db.UserQuestions.CountAsync(uq => uq.UserId == userId);
 
-    int randomQuestionIndex = random.Next(countOfQuestions);
-    
-    Question randomQuestion = (await _db.Questions.ToListAsync())[randomQuestionIndex];
+    public int GetTrueAnswerNumberUserQuestion(UserQuestion userQuestion)
+    {
+        List<Answer>? questionAnswers = userQuestion.Question?.Answers?.ToList();
 
-    return randomQuestion;
-  }
+        Answer? trueAnswer = questionAnswers?.FirstOrDefault(ans => ans.IsTrue);
+
+        return questionAnswers.IndexOf(trueAnswer) + 1;
+    }
+
+    private async Task<Question> GetRandomQuestion()
+    {
+        Random random = new Random();
+        int countOfQuestions = await _db.Questions.CountAsync();
+
+        int randomQuestionIndex = random.Next(countOfQuestions);
+
+        Question randomQuestion = (await _db.Questions.ToListAsync())[randomQuestionIndex];
+
+        return randomQuestion;
+    }
 }

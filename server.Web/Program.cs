@@ -11,28 +11,30 @@ using server.Infrastructure.Validation;
 /* @connection to database */
 var builder = WebApplication.CreateBuilder(args);
 string? connectionString = builder.Configuration.GetConnectionString("Default");
-builder.Services.AddDbContext<ApplicationContext>(options =>
-  options
-    .UseLazyLoadingProxies()
-    .UseSqlite(connectionString));
+builder.Services.AddDbContext<ApplicationContext>(
+    options => options.UseLazyLoadingProxies().UseSqlite(connectionString)
+);
 
 builder.Services.AddCors();
 
 /* @authentication and authorization */
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-  .AddJwtBearer(options => options.TokenValidationParameters = new()
-  {
-    ValidateIssuerSigningKey = true,
-    ValidateIssuer = true,
-    ValidateAudience = true,
-    ValidateLifetime = true,
-    ValidIssuer = builder.Configuration["JWT:ISSUER"],
-    ValidAudience = builder.Configuration["JWT:AUDIENCE"],
-    IssuerSigningKey = 
-      new SymmetricSecurityKey(
-        System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:KEY"])
-      )
-  });
+builder
+    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(
+        options =>
+            options.TokenValidationParameters = new()
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidIssuer = builder.Configuration["JWT:ISSUER"],
+                ValidAudience = builder.Configuration["JWT:AUDIENCE"],
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:KEY"])
+                )
+            }
+    );
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
@@ -51,8 +53,14 @@ builder.Services.AddScoped<IUsersQuestionsService, UsersQuestionsService>();
 builder.Services.AddTransient<IValidator<TokenDto>, TokenDtoValidator>();
 builder.Services.AddTransient<IValidator<RegisteredUserDto>, RegisteredUserDtoValidator>();
 builder.Services.AddTransient<IValidator<LoginUserDto>, LoginUserDtoValidator>();
-builder.Services.AddTransient<IValidator<AddedCategoryQuestionDto>, AddedCategoryQuestionDtoValidator>();
-builder.Services.AddTransient<IValidator<ChangedCategoryQuestionDto>, ChangedCategoryQuestionDtoValidator>();
+builder.Services.AddTransient<
+    IValidator<AddedCategoryQuestionDto>,
+    AddedCategoryQuestionDtoValidator
+>();
+builder.Services.AddTransient<
+    IValidator<ChangedCategoryQuestionDto>,
+    ChangedCategoryQuestionDtoValidator
+>();
 builder.Services.AddTransient<IValidator<AddedQuestionDto>, AddedQuestionDtoValidator>();
 builder.Services.AddTransient<IValidator<ChangedQuestionDto>, ChangedQuestionDtoValidator>();
 builder.Services.AddTransient<IValidator<AddedAnswerDto>, AddedAnswerDtoValidator>();
@@ -60,12 +68,14 @@ builder.Services.AddTransient<IValidator<ChangedAnswerDto>, ChangedAnswerDtoVali
 
 var app = builder.Build();
 
-app.UseCors(options => 
-  options
-    .WithOrigins("http://localhost:5173", "https://localhost:5173")
-    .AllowCredentials()
-    .AllowAnyHeader()
-    .AllowAnyMethod());
+app.UseCors(
+    options =>
+        options
+            .WithOrigins("http://localhost:5173", "https://localhost:5173")
+            .AllowCredentials()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+);
 
 /* @authentication and authorization */
 app.UseAuthentication();
@@ -76,8 +86,8 @@ app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseSwagger();
-  app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
