@@ -7,6 +7,10 @@ namespace server.Application.Interfaces;
 public interface IUsersQuestionsService
 {
     public Task<AskUserQuestionDto> GetNewAskUserQuestion(int userId);
+    public Task<AskUserQuestionDto> GetNewAskUserQuestionByCategory(
+        int userId,
+        int categoryQuestionId
+    );
     public Task<UserQuestion?> GetUserQuestionAsync(Expression<Func<UserQuestion, bool>> predicate);
     public Task<bool> CheckingAnswerUserQuestionAsync(
         AnswerUserQuestionDto answerUserQuestion,

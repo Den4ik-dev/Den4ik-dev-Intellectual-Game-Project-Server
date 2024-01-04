@@ -11,10 +11,15 @@ namespace server.Web.Controllers;
 public class UsersQuestionsController : ControllerBase
 {
     private IUsersQuestionsService _usersQuestionsService;
+    private ICategoriesQuestionsService _categoriesQuestionsService;
 
-    public UsersQuestionsController(IUsersQuestionsService usersQuestionsService)
+    public UsersQuestionsController(
+        IUsersQuestionsService usersQuestionsService,
+        ICategoriesQuestionsService categoriesQuestionsService
+    )
     {
         _usersQuestionsService = usersQuestionsService;
+        _categoriesQuestionsService = categoriesQuestionsService;
     }
 
     [HttpPost("ask"), Authorize]
@@ -23,6 +28,19 @@ public class UsersQuestionsController : ControllerBase
         int userId = int.Parse(User.Identity.Name);
 
         return await _usersQuestionsService.GetNewAskUserQuestion(userId);
+    }
+
+    [HttpPost("ask/{categoryQuestionId}"), Authorize]
+    public async Task<IActionResult> GetNewUserQuestionByCategory(int categoryQuestionId)
+    {
+        int userId = int.Parse(User.Identity.Name);
+
+        if (await _categoriesQuestionsService.GetCategoryQuestionAsync(categoryQuestionId) == null)
+            return BadRequest(new Response("Категория вопроса не найдена"));
+
+        return Ok(
+            await _usersQuestionsService.GetNewAskUserQuestionByCategory(userId, categoryQuestionId)
+        );
     }
 
     [HttpPost("answer"), Authorize]

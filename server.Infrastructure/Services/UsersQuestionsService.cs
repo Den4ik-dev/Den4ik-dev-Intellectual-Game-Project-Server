@@ -43,6 +43,34 @@ public class UsersQuestionsService : IUsersQuestionsService
         };
     }
 
+    public async Task<AskUserQuestionDto> GetNewAskUserQuestionByCategory(
+        int userId,
+        int categoryQuestionId
+    )
+    {
+        Question randomQuestion = await GetRandomQuestionByCategory(categoryQuestionId);
+
+        UserQuestion newUserQuestion = new UserQuestion()
+        {
+            UserId = userId,
+            QuestionId = randomQuestion.Id,
+            UserQuestionExpiryTime = DateTime.UtcNow.Add(TimeSpan.FromMinutes(2))
+        };
+
+        _db.UserQuestions.Add(newUserQuestion);
+        await _db.SaveChangesAsync();
+
+        return new AskUserQuestionDto
+        {
+            Id = newUserQuestion.Id,
+            UserId = newUserQuestion.UserId,
+            CategoryQuestionId = randomQuestion.CategoryQuestionId,
+            QuestionContent = randomQuestion.Content,
+            Answers = randomQuestion.Answers?.Select(ans => ans.Content).ToArray(),
+            ImagePath = randomQuestion.Image?.Path
+        };
+    }
+
     public async Task SetUserQuestionExpiryTimeAsync(UserQuestion userQuestion)
     {
         userQuestion.UserQuestionExpiryTime = DateTime.UtcNow;
@@ -95,6 +123,24 @@ public class UsersQuestionsService : IUsersQuestionsService
         int randomQuestionIndex = random.Next(countOfQuestions);
 
         Question randomQuestion = (await _db.Questions.ToListAsync())[randomQuestionIndex];
+
+        return randomQuestion;
+    }
+
+    private async Task<Question> GetRandomQuestionByCategory(int categoryId)
+    {
+        Random random = new Random();
+
+        List<Question> rangeOfQuestion = await _db.Questions.Where(
+            q => q.CategoryQuestionId == categoryId
+        )
+            .ToListAsync();
+
+        int countOfQuestions = rangeOfQuestion.Count;
+
+        int randomQuestionIndex = random.Next(countOfQuestions);
+
+        Question randomQuestion = rangeOfQuestion[randomQuestionIndex];
 
         return randomQuestion;
     }
