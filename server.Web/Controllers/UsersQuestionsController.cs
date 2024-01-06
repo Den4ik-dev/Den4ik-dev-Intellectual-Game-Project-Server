@@ -30,7 +30,7 @@ public class UsersQuestionsController : ControllerBase
         return await _usersQuestionsService.GetNewAskUserQuestion(userId);
     }
 
-    [HttpPost("ask/{categoryQuestionId}"), Authorize]
+    [HttpPost("ask/{categoryQuestionId:int}"), Authorize]
     public async Task<IActionResult> GetNewUserQuestionByCategory(int categoryQuestionId)
     {
         int userId = int.Parse(User.Identity.Name);
@@ -82,7 +82,7 @@ public class UsersQuestionsController : ControllerBase
         return Ok(new { IsTrue = false, TrueAnswerNumber = trueAnswerNumber });
     }
 
-    [HttpPost("correct/answer/{idUserQuestion}"), Authorize]
+    [HttpPost("correct/answer/{idUserQuestion:int}"), Authorize]
     public async Task<IActionResult> GetCorrectAnswer(int idUserQuestion)
     {
         int userId = int.Parse(User.Identity.Name);
@@ -153,5 +153,20 @@ public class UsersQuestionsController : ControllerBase
                         AnswerNumber = uq.AnswerNumber
                     }
             );
+    }
+
+    [HttpGet("{userQuestionId:int}"), Authorize]
+    public async Task<IActionResult> GetDetailsUserQuestionById(int userQuestionId)
+    {
+        int userId = int.Parse(User.Identity.Name);
+
+        UserQuestion? userQuestion = await _usersQuestionsService.GetUserQuestionAsync(
+            uq => uq.Id == userQuestionId && uq.UserId == userId
+        );
+
+        if (userQuestion == null)
+            return BadRequest(new Response("Ваш вопрос не найден"));
+
+        return Ok(_usersQuestionsService.GetUserQuestionDetails(userQuestion));
     }
 }

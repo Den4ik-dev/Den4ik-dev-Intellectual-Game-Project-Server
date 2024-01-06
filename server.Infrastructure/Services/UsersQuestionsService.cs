@@ -118,6 +118,22 @@ public class UsersQuestionsService : IUsersQuestionsService
         return questionAnswers.IndexOf(trueAnswer) + 1;
     }
 
+    public UserQuestionDetailsDto GetUserQuestionDetails(UserQuestion userQuestion)
+    {
+        return new UserQuestionDetailsDto()
+        {
+            ImagePath = userQuestion.Question?.Image?.Path!,
+            QuestionContent = userQuestion.Question?.Content!,
+            Answers = userQuestion.Question?.Answers.Select(ans => ans.Content).ToArray(),
+            AnswerNumber = userQuestion.AnswerNumber,
+            TrueAnswerNumber =
+                Array.IndexOf(
+                    userQuestion.Question?.Answers.ToArray(),
+                    userQuestion.Question.Answers.First(ans => ans.IsTrue)
+                ) + 1
+        };
+    }
+
     private async Task<Question> GetRandomQuestion()
     {
         Random random = new Random();
