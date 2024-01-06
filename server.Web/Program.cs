@@ -48,6 +48,7 @@ builder.Services.AddScoped<ICategoriesQuestionsService, CategoriesQuestionsServi
 builder.Services.AddScoped<IQuestionsService, QuestionsService>();
 builder.Services.AddScoped<IAnswersService, AnswersService>();
 builder.Services.AddScoped<IUsersQuestionsService, UsersQuestionsService>();
+builder.Services.AddScoped<IUsersStatisticsService, UsersStatisticsService>();
 
 /* @validation */
 builder.Services.AddTransient<IValidator<TokenDto>, TokenDtoValidator>();
@@ -75,6 +76,7 @@ app.UseCors(
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod()
+            .WithExposedHeaders("x-total-count")
 );
 
 /* @authentication and authorization */

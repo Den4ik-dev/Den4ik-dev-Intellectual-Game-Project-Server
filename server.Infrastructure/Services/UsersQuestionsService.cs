@@ -101,7 +101,10 @@ public class UsersQuestionsService : IUsersQuestionsService
         _db.UserQuestions.Where(uq => uq.UserId == userId);
 
     public IEnumerable<UserQuestion> GetRangeOfUserQuestion(int userId, int limit, int page) =>
-        _db.UserQuestions.Where(uq => uq.UserId == userId).Skip(limit * page).Take(limit);
+        _db.UserQuestions.Where(uq => uq.UserId == userId)
+            .OrderByDescending(uq => uq.Id)
+            .Skip(limit * page)
+            .Take(limit);
 
     public async Task<int> CountOfUserQuestions(int userId) =>
         await _db.UserQuestions.CountAsync(uq => uq.UserId == userId);
