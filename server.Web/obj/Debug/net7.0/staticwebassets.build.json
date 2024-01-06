@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lEPM9320JpvNIVGhOvlr/dNQHqe3y2m3buHqa5qpgRA=",
+  "Hash": "+HSDNJwxSnFgzUdwGG3TlLLaLIUE6INA8OAONLBJ4Rg=",
   "Source": "server.Web",
   "BasePath": "_content/server.Web",
   "Mode": "Default",
@@ -34,6 +34,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\questions\\images\\1.png"
+    },
+    {
+      "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\2.png",
+      "SourceId": "server.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "RelativePath": "questions/images/2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\questions\\images\\2.png"
+    },
+    {
+      "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\3.png",
+      "SourceId": "server.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "RelativePath": "questions/images/3.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\questions\\images\\3.png"
     }
   ]
 }

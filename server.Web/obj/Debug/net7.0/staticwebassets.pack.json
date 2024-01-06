@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\questions\\images\\1.png"
     },
     {
+      "Id": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\2.png",
+      "PackagePath": "staticwebassets\\questions\\images\\2.png"
+    },
+    {
+      "Id": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\3.png",
+      "PackagePath": "staticwebassets\\questions\\images\\3.png"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.server.Web.props",
       "PackagePath": "build\\server.Web.props"
     },
