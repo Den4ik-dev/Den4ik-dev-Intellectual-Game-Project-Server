@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+HSDNJwxSnFgzUdwGG3TlLLaLIUE6INA8OAONLBJ4Rg=",
+  "Hash": "PmbnqqgEgDZI0UN9GLg8I3qNULthawK61vSgIUlE6oA=",
   "Source": "server.Web",
   "BasePath": "_content/server.Web",
   "Mode": "Default",
@@ -16,6 +16,44 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\categories_questions\\images\\1.png",
+      "SourceId": "server.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "RelativePath": "categories_questions/images/1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\categories_questions\\images\\1.png"
+    },
+    {
+      "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\categories_questions\\images\\2.png",
+      "SourceId": "server.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\",
+      "BasePath": "_content/server.Web",
+      "RelativePath": "categories_questions/images/2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\categories_questions\\images\\2.png"
+    },
     {
       "Identity": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\1.png",
       "SourceId": "server.Web",

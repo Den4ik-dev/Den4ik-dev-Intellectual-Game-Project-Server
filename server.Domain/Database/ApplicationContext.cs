@@ -9,13 +9,14 @@ public class ApplicationContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<CategoryQuestion> CategoryQuestions { get; set; }
-    public DbSet<QuestionImage> Images { get; set; }
+    public DbSet<CategoryQuestionImage> CategoriesQuestionsImages { get; set; }
+    public DbSet<QuestionImage> QuestionImages { get; set; }
     public DbSet<Answer> Answers { get; set; }
     public DbSet<UserQuestion> UserQuestions { get; set; }
     public DbSet<Role> Roles { get; set; }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
-        : base(options) => Database.EnsureCreated();
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,5 +27,6 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new CategoryQuestionConfiguration());
         modelBuilder.ApplyConfiguration(new AnswerConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryQuestionImageConfiguration());
     }
 }

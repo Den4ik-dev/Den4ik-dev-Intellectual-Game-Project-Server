@@ -105,12 +105,28 @@ public class CategoriesQuestionsController : ControllerBase
 
         return _categoriesQuestionsService
             .GetRangeOfCategoriesQuestions(limit, page)
-            .Select(cq => new CategoryQuestionDto() { Id = cq.Id, Title = cq.Title });
+            .Select(
+                cq =>
+                    new CategoryQuestionDto()
+                    {
+                        Id = cq.Id,
+                        Title = cq.Title,
+                        ImagePath = cq.Image.Path
+                    }
+            );
     }
 
     [HttpGet("all"), Authorize]
     public IEnumerable<CategoryQuestionDto> GetAllCategoriesQuestions() =>
         _categoriesQuestionsService
             .GetAllCategoriesQuestions()
-            .Select(cq => new CategoryQuestionDto() { Id = cq.Id, Title = cq.Title });
+            .Select(
+                cq =>
+                    new CategoryQuestionDto()
+                    {
+                        Id = cq.Id,
+                        Title = cq.Title,
+                        ImagePath = cq.Image.Path
+                    }
+            );
 }

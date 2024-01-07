@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\categories_questions\\images\\1.png",
+      "PackagePath": "staticwebassets\\categories_questions\\images\\1.png"
+    },
+    {
+      "Id": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\categories_questions\\images\\2.png",
+      "PackagePath": "staticwebassets\\categories_questions\\images\\2.png"
+    },
+    {
       "Id": "C:\\Users\\StokovAdmin\\Desktop\\Intellectual-Game-Project\\Den4ik-dev-Intellectual-Game-Project-Server\\server.Web\\wwwroot\\questions\\images\\1.png",
       "PackagePath": "staticwebassets\\questions\\images\\1.png"
     },

@@ -6,4 +6,5 @@ public class CategoryQuestion
     public string? Title { get; set; }
 
     public virtual ICollection<Question>? Questions { get; set; }
+    public virtual CategoryQuestionImage Image { get; set; }
 }

@@ -165,3 +165,7 @@ C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-G
 C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\obj\Debug\net7.0\server.Web.pdb
 C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\obj\Debug\net7.0\server.Web.genruntimeconfig.cache
 C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\obj\Debug\net7.0\ref\server.Web.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\bin\Debug\net7.0\Humanizer.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\StokovAdmin\Desktop\Intellectual-Game-Project\Den4ik-dev-Intellectual-Game-Project-Server\server.Web\bin\Debug\net7.0\System.CodeDom.dll

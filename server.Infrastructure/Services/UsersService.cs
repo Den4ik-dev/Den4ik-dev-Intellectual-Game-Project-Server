@@ -42,7 +42,7 @@ public class UsersService : IUsersService
             Password = Convert.ToHexString(
                 SHA512.Create().ComputeHash(Encoding.UTF8.GetBytes(loginUser.Password))
             ),
-            RoleId = 1 /* user role */
+            Role = _db.Roles.First(r => r.Name.ToLower() == RoleTypes.USER) /* user role */
         };
 
         _db.Users.Add(user);
